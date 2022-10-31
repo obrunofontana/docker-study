@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0
+    command: --innodb-use-native-aio=0
+    container_name: mysql-test
+    restart: always
+    tty: true
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - node-net
+
+networks:
+  node-net:
+    driver: bridge
